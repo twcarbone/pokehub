@@ -1,4 +1,17 @@
-import { Card, CardBody, CardFooter, CardHeader, Heading, Image } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Center,
+  Container,
+  Heading,
+  Image,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Tr,
+} from "@chakra-ui/react";
 
 import usePokemon from "../hooks/usePokemon";
 
@@ -12,10 +25,29 @@ function PokemonCard({ id }: Props) {
   return (
     <Card>
       <CardBody>
-        <Image src={pokemon?.spriteURL} alt={pokemon?.name} />
-        <Heading>{pokemon?.name}</Heading>
+        <Center>
+          <Image src={pokemon?.spriteURL} alt={pokemon?.name} />
+        </Center>
+        <Heading textAlign="center">{pokemon?.name}</Heading>
+        <TableContainer>
+          <Table variant="unstyled" size="sm">
+            <Tbody>
+              <Tr>
+                <Td>Base Experience</Td>
+                <Td>{pokemon?.baseExperience}</Td>
+              </Tr>
+              <Tr>
+                <Td>Height</Td>
+                <Td>{pokemon?.height}</Td>
+              </Tr>
+              <Tr>
+                <Td>Weight</Td>
+                <Td>{pokemon?.weight}</Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
       </CardBody>
-      <CardFooter>{error}</CardFooter>
     </Card>
   );
 }
