@@ -18,7 +18,7 @@ function usePokemon(id: number) {
           name: response.data.name,
           height: response.data.height,
           weight: response.data.weight,
-          baseExperience: response.data.baseExperience,
+          baseExperience: response.data.base_experience,
           abilityCount: 2,
           spriteURL: response.data.sprites.front_default,
         });

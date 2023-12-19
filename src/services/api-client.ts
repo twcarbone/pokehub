@@ -16,9 +16,9 @@ interface AbilityResource extends Resource {
 
 interface PokemonResource extends Resource {
   name: string;
-  baseExperience: number;
+  base_experience: number;
   height: number;
-  isDefault: boolean;
+  is_default: boolean;
   order: number;
   weight: number;
   abilites: AbilityResource[];
