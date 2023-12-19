@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { CanceledError } from "../services/api-client";
 import pokemonService, { Pokemon } from "../services/pokemon-service";
 
-function useUsers() {
+function usePokemon() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -28,4 +28,4 @@ function useUsers() {
   return { pokemon, error, isLoading, setPokemon, setError };
 }
 
-export default useUsers;
+export default usePokemon;
