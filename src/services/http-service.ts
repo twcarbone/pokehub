@@ -11,14 +11,14 @@ class HttpService {
     this.endpoint = endpoint;
   }
 
-  private getResource(resource: string) {
+  private getResource<T>(resource: string) {
     const controller = new AbortController();
-    const request = apiClient.get(resource, { signal: controller.signal });
+    const request = apiClient.get<T>(resource, { signal: controller.signal });
     return { request, cancel: () => controller.abort() };
   }
 
   getOne<T>(id: number) {
-    return this.getResource(this.endpoint + "/" + id);
+    return this.getResource<T>(this.endpoint + "/" + id);
   }
 
   getAll<T>() {
