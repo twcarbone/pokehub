@@ -2,38 +2,24 @@ import { useEffect, useState } from "react";
 
 import { CanceledError, PokemonResource } from "../services/api-client";
 import pokemonService, { Pokemon } from "../services/pokemon-service";
+import useFetch from "./useFetch";
 
-function usePokemon(id: number) {
-  const [pokemon, setPokemon] = useState<Pokemon>();
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
+function usePokemon() {
+  const { data, error, isLoading, setData, setError } =
+    useFetch<PokemonResource>(pokemonService);
 
-  useEffect(() => {
-    setLoading(true);
-    const { request, cancel } = pokemonService.getOne<PokemonResource>(id);
-    request
-      .then((response) => {
-        setPokemon({
-          id: response.data.id,
-          name: response.data.name,
-          height: response.data.height,
-          weight: response.data.weight,
-          baseExperience: response.data.base_experience,
-          abilityCount: 2,
-          spriteURL: response.data.sprites.front_default,
-        });
-        setLoading(false);
-      })
-      .catch((error) => {
-        if (error instanceof CanceledError) return;
-        setError(error.message);
-        setLoading(false);
-      });
+  console.log(data);
+  const pokemon = data?.map((d) => ({
+    id: d.id,
+    name: d.name,
+    height: d.height,
+    weight: d.weight,
+    baseExperience: d.base_experience,
+    abilityCount: 2,
+    spriteURL: d.sprites.front_default,
+  }));
 
-    return () => cancel();
-  }, []);
-
-  return { pokemon, error, isLoading, setPokemon, setError };
+  return { pokemon, error, isLoading, setError };
 }
 
 export default usePokemon;
