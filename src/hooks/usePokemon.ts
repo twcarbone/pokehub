@@ -1,25 +1,48 @@
 import { useEffect, useState } from "react";
 
-import { CanceledError, PokemonResource } from "../services/api-client";
-import pokemonService, { Pokemon } from "../services/pokemon-service";
-import useFetch from "./useFetch";
+import { FetchService, Resource } from "../services/fetch-service";
+
+interface AbilityResource extends Resource {
+  name: string;
+  effect_entries: [
+    {
+      effect: string;
+      short_effect: string;
+    },
+  ];
+}
+
+interface PokemonResource extends Resource {
+  name: string;
+  base_experience: number;
+  height: number;
+  is_default: boolean;
+  order: number;
+  weight: number;
+  abilites: AbilityResource[];
+  sprites: {
+    front_default: string;
+  };
+}
+
+interface Pokemon {
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  baseExperience: number;
+  abilityCount: number;
+  spriteURL: string;
+}
 
 function usePokemon() {
-  const { data, error, isLoading, setData, setError } =
-    useFetch<PokemonResource>(pokemonService);
+  console.log("Entering usePokemon");
+  const { data, error, isLoading } = FetchService.fetchOne<PokemonResource>("pokemon", 1);
 
-  console.log(data);
-  const pokemon = data?.map((d) => ({
-    id: d.id,
-    name: d.name,
-    height: d.height,
-    weight: d.weight,
-    baseExperience: d.base_experience,
-    abilityCount: 2,
-    spriteURL: d.sprites.front_default,
-  }));
+  const pokemon = {};
 
-  return { pokemon, error, isLoading, setError };
+  console.log("Returning from usePokemon");
+  return { pokemon, error, isLoading };
 }
 
 export default usePokemon;

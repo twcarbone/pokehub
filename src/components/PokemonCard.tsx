@@ -20,7 +20,8 @@ interface Props {
 }
 
 function PokemonCard({ id }: Props) {
-  const { pokemon, error, isLoading, setPokemon, setError } = usePokemon(id);
+  console.log("Entering PokemonCard");
+  const { pokemon, error, isLoading } = usePokemon();
 
   return (
     <Card>

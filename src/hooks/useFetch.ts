@@ -25,7 +25,7 @@ function useFetch<T>(service: any) {
     return () => cancel();
   }, []);
 
-  return { data, error, isLoading, setData, setError };
+  return { data, error, isLoading };
 }
 
 export default useFetch;
