@@ -4,6 +4,7 @@ import PokemonDashboard from "./components/PokemonDashboard";
 import usePokemon from "./hooks/usePokemon";
 
 function App() {
+  console.log("Entering App");
   return (
     <ChakraProvider>
       <PokemonDashboard />

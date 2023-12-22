@@ -12,12 +12,14 @@ class HttpService {
   }
 
   private getResource<T>(resource: string) {
+    console.log("Entering getResource");
     const controller = new AbortController();
     const request = apiClient.get<T>(resource, { signal: controller.signal });
     return { request, cancel: () => controller.abort() };
   }
 
   getOne<T>(id: number) {
+    console.log("Entering getOne");
     return this.getResource<T>(this.endpoint + "/" + id);
   }
 
